@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Button from "./components/Button";
 
 function App() {
+  const [homepage, setHomePage] = useState(true);
+
+  function clickHandler() {
+    setHomePage(false);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {homepage && (
+        <div>
+          <h1>Welcome to Poké-Race</h1>
+          <Button onClick={clickHandler}>Start</Button>
+        </div>
+      )}
     </div>
   );
 }
