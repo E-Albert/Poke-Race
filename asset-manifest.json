@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/Poke-Race/static/css/main.31d6cfe0.css",
-    "main.js": "/Poke-Race/static/js/main.4e0c513b.js",
+    "main.css": "/Poke-Race/static/css/main.b6b96e06.css",
+    "main.js": "/Poke-Race/static/js/main.93527097.js",
     "index.html": "/Poke-Race/index.html",
-    "main.4e0c513b.js.map": "/Poke-Race/static/js/main.4e0c513b.js.map"
+    "main.b6b96e06.css.map": "/Poke-Race/static/css/main.b6b96e06.css.map",
+    "main.93527097.js.map": "/Poke-Race/static/js/main.93527097.js.map"
   },
   "entrypoints": [
-    "static/css/main.31d6cfe0.css",
-    "static/js/main.4e0c513b.js"
+    "static/css/main.b6b96e06.css",
+    "static/js/main.93527097.js"
   ]
 }
