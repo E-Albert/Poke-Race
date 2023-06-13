@@ -5,11 +5,9 @@ import GamePage from './components/GamePage'
 
 function App() {
   const [homepage, setHomePage] = useState(true);
-  const [gamePage, setGamePage] = useState(false)
 
   function clickHandler() {
     setHomePage(false);
-    setGamePage(true)
   }
   return (
     <div>
@@ -19,7 +17,7 @@ function App() {
           <Button onClick={clickHandler}>Start</Button>
         </div>
       )}
-      {gamePage && <GamePage />}
+      {!homepage && <GamePage />}
     </div>
   );
 }
