@@ -7,7 +7,14 @@ function InstructionsModal(props) {
       <div className="backdrop"></div>
       <div className="modal">
         <h2>Welcome to Poké-Race</h2>
-        <p>Here's how to play</p>
+        <br />
+        <h4>Here's how to play</h4>
+        <p>
+          Select a Pokemon to race with. Your opponent will be randomly chosen.
+          Answer questions correctly to avoid being attacked by your opponent.
+          First to the finish line wins!
+        </p>
+        <br />
         <Button onClick={props.modal}>Got it!</Button>
       </div>
     </div>
