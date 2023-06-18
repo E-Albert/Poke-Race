@@ -1,6 +1,4 @@
-import React from "react";
 
-function Questions() {
   let pokeQuestions = [
     {
       title: "What type of Pokemon is Squirtle?",
@@ -58,10 +56,6 @@ function Questions() {
         answer: "With a Thunderstone",
     },
   ];
-    
-    return (
-        <div></div>
-    )
-}
+   
 
-export default Questions
+export default pokeQuestions
