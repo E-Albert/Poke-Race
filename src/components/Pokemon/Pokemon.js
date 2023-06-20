@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Button from "./Button";
+import Button from "../UI/Button";
 import Opponent from "./Opponent";
-import './Pokemon.css'
+import "./Pokemon.css";
 
 function Pokemon() {
   const [userPokemon, setUserPokemon] = useState([]);
   const [chosenPokemon, setchosenPokemon] = useState("pikachu");
-  const [theOpponent, setTheOpponent] = useState(false)
-
+  const [theOpponent, setTheOpponent] = useState(false);
 
   function userChoice(event) {
     console.log(event.target.value);
@@ -34,9 +33,9 @@ function Pokemon() {
   }
 
   function chooseOpponent(event) {
-    event.preventDefault()
-    console.log('working so far')
-    setTheOpponent(true)
+    event.preventDefault();
+    console.log("working so far");
+    setTheOpponent(true);
   }
 
   useEffect(() => {
@@ -66,7 +65,9 @@ function Pokemon() {
       <p>Type: {userPokemon.pokeType}</p>
       <img src={userPokemon.pokePicture} alt="pokemon facing forward" />
       <br />
-      <Button type="submit" form="pokeForm" >I choose you!</Button>
+      <Button type="submit" form="pokeForm">
+        I choose you!
+      </Button>
       <br />
       <br />
       {theOpponent && <Opponent />}
