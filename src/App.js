@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-import Button from "./components/UI/Button";
-import GamePage from "./components/GamePage";
+import StartPage from "./components/UI/StartPage";
+import Header from "./components/UI/Header"
+import Pokemon from "./components/Pokemon/Pokemon"
+import InstructionsModal from "./components/UI/InstructionsModal"
+import Quiz from "./components/Quiz/Quiz"
 
 /*-add styling with tailwind css
   -disable form after user picks pokemon
@@ -13,19 +16,23 @@ import GamePage from "./components/GamePage";
 
 function App() {
   const [homepage, setHomePage] = useState(true);
+  const [modal, setModal] = useState(true);
 
   function clickHandler() {
     setHomePage(false);
   }
+
+  function modalHandler() {
+    setModal(false);
+  }
+
   return (
     <div>
-      {homepage && (
-        <div className="homepage">
-          <h1>Poké-Race</h1>
-          <Button onClick={clickHandler}>Start</Button>
-        </div>
-      )}
-      {!homepage && <GamePage />}
+      {homepage && <StartPage removeStartPage={clickHandler} />}
+      {!homepage && modal && <InstructionsModal removeModal={modalHandler} />}
+      {!homepage && <Header />}
+      {!homepage && <Pokemon />}
+      {!homepage && <Quiz />}
     </div>
   );
 }

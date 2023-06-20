@@ -15,7 +15,7 @@ function InstructionsModal(props) {
           First to the finish line wins!
         </p>
         <br />
-        <Button onClick={props.modal}>Got it!</Button>
+        <Button onClick={props.removeModal}>Got it!</Button>
       </div>
     </div>
   );
