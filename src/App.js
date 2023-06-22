@@ -26,6 +26,7 @@ import Quiz from "./components/Quiz/Quiz"
 function App() {
   const [homepage, setHomePage] = useState(true);
   const [modal, setModal] = useState(true);
+  const [pokemonChosen, setPokemonChosen] = useState(false)
 
   function clickHandler() {
     setHomePage(false);
@@ -35,13 +36,19 @@ function App() {
     setModal(false);
   }
 
+  function renderQuiz() {
+    setPokemonChosen(true)
+  }
+
+
+
   return (
     <div>
       {homepage && <StartPage removeStartPage={clickHandler} />}
       {!homepage && modal && <InstructionsModal removeModal={modalHandler} />}
       {!homepage && <Header />}
-      {!homepage && <Pokemon />}
-      {!homepage && <Quiz />}
+      {!homepage && !pokemonChosen && <Pokemon startQuiz={renderQuiz} />}
+      {!homepage && pokemonChosen && <Quiz />}
     </div>
   );
 }

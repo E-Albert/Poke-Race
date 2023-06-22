@@ -3,11 +3,12 @@ import Button from "../UI/Button";
 import Opponent from "./Opponent";
 import "./Pokemon.css";
 
-function Pokemon() {
+function Pokemon(props) {
   const [userPokemon, setUserPokemon] = useState([]);
   const [chosenPokemon, setchosenPokemon] = useState("pikachu");
   const [theOpponent, setTheOpponent] = useState(false);
   const [showForm, setShowForm] = useState(true);
+  const [showQuizButton, setShowQuizButton] = useState(false)
 
   function userChoice(event) {
     console.log(event.target.value);
@@ -40,9 +41,21 @@ function Pokemon() {
     setTheOpponent(true);
   }
 
+  function renderQuizButton(theOpponent) {
+    if (theOpponent) {
+      setTimeout(() => {
+        setShowQuizButton(true)
+      }, 4000) 
+    }
+  }
+
   useEffect(() => {
     fetchPokeData(chosenPokemon);
   }, [chosenPokemon]);
+
+  useEffect(() => {
+    renderQuizButton(theOpponent)
+  }, [theOpponent])
 
   return (
     <div className="pokeDiv">
@@ -79,10 +92,15 @@ function Pokemon() {
       <br />
       <br />
       {theOpponent && <Opponent />}
+      {showQuizButton && (
+        <div>
+          <Button onClick={props.startQuiz}>Lets Race</Button>
+        </div>
+      )}
     </div>
   );
 }
 
-//figure out for useEffect is running twice and make quiz. Find way to start quiz
+//Find way to start quiz
 
 export default Pokemon;
