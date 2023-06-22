@@ -7,6 +7,7 @@ function Pokemon() {
   const [userPokemon, setUserPokemon] = useState([]);
   const [chosenPokemon, setchosenPokemon] = useState("pikachu");
   const [theOpponent, setTheOpponent] = useState(false);
+  const [showForm, setShowForm] = useState(true);
 
   function userChoice(event) {
     console.log(event.target.value);
@@ -35,29 +36,33 @@ function Pokemon() {
   function chooseOpponent(event) {
     event.preventDefault();
     console.log("working so far");
+    setShowForm(false);
     setTheOpponent(true);
   }
 
   useEffect(() => {
     fetchPokeData(chosenPokemon);
   }, [chosenPokemon]);
+
   return (
     <div className="pokeDiv">
-      <form id="pokeForm" onSubmit={chooseOpponent}>
-        <label>Choose your Pokemon</label>
-        <select onChange={userChoice}>
-          <option value="pikachu">Pikachu</option>
-          <option value="charizard">Charizard</option>
-          <option value="blastoise">Blastoise</option>
-          <option value="venusaur">Venusaur</option>
-          <option value="hitmonlee">Hitmonlee</option>
-          <option value="arbok">Arbok</option>
-          <option value="golem">Golem</option>
-          <option value="alakazam">Alakazam</option>
-          <option value="gengar">Gengar</option>
-          <option value="snorlax">Snorlax</option>
-        </select>
-      </form>
+      {showForm && (
+        <form id="pokeForm" onSubmit={chooseOpponent}>
+          <label>Choose your Pokemon</label>
+          <select onChange={userChoice}>
+            <option value="pikachu">Pikachu</option>
+            <option value="charizard">Charizard</option>
+            <option value="blastoise">Blastoise</option>
+            <option value="venusaur">Venusaur</option>
+            <option value="hitmonlee">Hitmonlee</option>
+            <option value="arbok">Arbok</option>
+            <option value="golem">Golem</option>
+            <option value="alakazam">Alakazam</option>
+            <option value="gengar">Gengar</option>
+            <option value="snorlax">Snorlax</option>
+          </select>
+        </form>
+      )}
       <br />
       <p>{userPokemon.pokeName}</p>
       <p>First Attack: {userPokemon.pokeMoveOne}</p>
@@ -65,9 +70,12 @@ function Pokemon() {
       <p>Type: {userPokemon.pokeType}</p>
       <img src={userPokemon.pokePicture} alt="pokemon facing forward" />
       <br />
-      <Button type="submit" form="pokeForm">
-        I choose you!
-      </Button>
+      {showForm && (
+        <Button type="submit" form="pokeForm">
+          I choose you!
+        </Button>
+      )}
+      {!showForm && <div>VS</div>}
       <br />
       <br />
       {theOpponent && <Opponent />}
