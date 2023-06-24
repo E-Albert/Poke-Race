@@ -9,6 +9,7 @@ function Pokemon(props) {
   const [theOpponent, setTheOpponent] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [showQuizButton, setShowQuizButton] = useState(false)
+  const [opponentData, setOpponentData] = useState({})
 
   function userChoice(event) {
     console.log(event.target.value);
@@ -49,13 +50,22 @@ function Pokemon(props) {
     }
   }
 
+  function saveOpponentPokeInfo(opponentInfo) {
+    setOpponentData(opponentInfo)
+    console.log(opponentInfo)
+  }
+
   useEffect(() => {
     fetchPokeData(chosenPokemon);
   }, [chosenPokemon]);
 
   useEffect(() => {
-    renderQuizButton(theOpponent)
-  }, [theOpponent])
+    let bothPokeInfo = Object.assign({}, userPokemon, opponentData);
+    console.log(bothPokeInfo);
+    props.grabPokeInfo(bothPokeInfo);
+    renderQuizButton(theOpponent);
+    // eslint-disable-next-line
+  }, [theOpponent, userPokemon, opponentData])
 
   return (
     <div className="pokeDiv">
@@ -91,7 +101,7 @@ function Pokemon(props) {
       {!showForm && <div>VS</div>}
       <br />
       <br />
-      {theOpponent && <Opponent />}
+      {theOpponent && <Opponent grabOpponentInfo={saveOpponentPokeInfo} />}
       {showQuizButton && (
         <div>
           <Button onClick={props.startQuiz}>Lets Race</Button>
@@ -100,7 +110,5 @@ function Pokemon(props) {
     </div>
   );
 }
-
-//Find way to start quiz
 
 export default Pokemon;

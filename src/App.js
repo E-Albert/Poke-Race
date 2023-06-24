@@ -5,10 +5,9 @@ import Header from "./components/UI/Header"
 import Pokemon from "./components/Pokemon/Pokemon"
 import InstructionsModal from "./components/UI/InstructionsModal"
 import Quiz from "./components/Quiz/Quiz"
+import RaceScreen from "./components/Race/RaceScreen";
 
 /*-add styling with tailwind css
-  -disable form after user picks pokemon
-  -make pokemon disappear when quiz starts
   -save pokemon data and make them appear on the side(top on mobile)
   -make quiz come up after both pokemon are chosen
   -set timer and add/subtract time based on user answer
@@ -23,10 +22,12 @@ import Quiz from "./components/Quiz/Quiz"
   -loading image
   */
 
+
 function App() {
   const [homepage, setHomePage] = useState(true);
   const [modal, setModal] = useState(true);
   const [pokemonChosen, setPokemonChosen] = useState(false)
+  const [pokemonInfo, setPokemonInfo] = useState({})
 
   function clickHandler() {
     setHomePage(false);
@@ -40,6 +41,10 @@ function App() {
     setPokemonChosen(true)
   }
 
+  function getPokeInfoHandler(pokeInfo) {
+    setPokemonInfo(pokeInfo)
+    console.log(pokeInfo)
+  }
 
 
   return (
@@ -47,8 +52,9 @@ function App() {
       {homepage && <StartPage removeStartPage={clickHandler} />}
       {!homepage && modal && <InstructionsModal removeModal={modalHandler} />}
       {!homepage && <Header />}
-      {!homepage && !pokemonChosen && <Pokemon startQuiz={renderQuiz} />}
+      {!homepage && !pokemonChosen && <Pokemon startQuiz={renderQuiz} grabPokeInfo={getPokeInfoHandler} />}
       {!homepage && pokemonChosen && <Quiz />}
+      {!homepage && pokemonChosen && <RaceScreen racerInfo={pokemonInfo} />}
     </div>
   );
 }

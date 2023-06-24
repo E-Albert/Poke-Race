@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Opponent() {
+function Opponent(props) {
   const [opponentPokemon, setOpponentPokemon] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -17,14 +17,14 @@ function Opponent() {
       "clefable",
       "meowth",
     ];
-    
+
     const opponentPokePicker = setTimeout(() => {
       let randomPokemon = opponentArray[Math.floor(Math.random() * 10)];
       console.log(randomPokemon);
       fetch(`https://pokeapi.co/api/v2/pokemon/${randomPokemon}`)
         .then((res) => res.json())
         .then((data) => {
-          setIsLoading(false)
+          setIsLoading(false);
           console.log(data);
           const opponentTransformedData = {
             opponentPokeName: data.name.toUpperCase(),
@@ -36,6 +36,7 @@ function Opponent() {
             opponentPokePicture: data.sprites.front_default,
           };
           setOpponentPokemon(opponentTransformedData);
+          props.grabOpponentInfo(opponentTransformedData);
         })
         .catch((err) => console.log(err));
     }, 3000);
@@ -43,6 +44,7 @@ function Opponent() {
     return () => {
       clearTimeout(opponentPokePicker);
     };
+    // eslint-disable-next-line
   }, []);
 
   return (
