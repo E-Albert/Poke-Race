@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import pokeQuestions from "./Questions";
 import Button from "../UI/Button";
 
 function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [quizCountDown, setQuizCountDown] = useState(5)
 
   function checkAnswer(event) {
     console.log(event.target.value);
@@ -23,7 +24,21 @@ function Quiz() {
     }
   }
 
-  return (
+  useEffect(() => {
+
+    // let countTimer = setInterval(() => {
+      
+    //     quizCountDown > 0 && setQuizCountDown(prevCountdown => prevCountdown -1)
+      
+      
+    // }, 1000)
+
+    const countTimer = quizCountDown > 0 && setInterval(() => setQuizCountDown(prevCount => prevCount - 1), 1000)
+
+    return ()=>clearInterval(countTimer)
+  }, [quizCountDown])
+  
+  let quizContent = (
     <div>
       <div className="question">{pokeQuestions[currentQuestion].title}</div>
       <div className="answers">
@@ -33,6 +48,12 @@ function Quiz() {
           </Button>
         ))}
       </div>
+    </div>
+  );
+
+  return (
+    <div>
+      {quizCountDown === 0? quizContent : `The race starts in ${quizCountDown}`}
     </div>
   );
 }
