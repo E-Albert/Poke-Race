@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import pokeQuestions from "./Questions";
 import Button from "../UI/Button";
 
-function Quiz() {
+function Quiz(props) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizCountDown, setQuizCountDown] = useState(5)
 
@@ -25,17 +25,15 @@ function Quiz() {
   }
 
   useEffect(() => {
+    const countTimer =
+      quizCountDown > 0 &&
+      setInterval(() => setQuizCountDown((prevCount) => prevCount - 1), 1000);
+    if (quizCountDown === 0) {
+      props.preQuiz(true);
+    }
 
-    // let countTimer = setInterval(() => {
-      
-    //     quizCountDown > 0 && setQuizCountDown(prevCountdown => prevCountdown -1)
-      
-      
-    // }, 1000)
-
-    const countTimer = quizCountDown > 0 && setInterval(() => setQuizCountDown(prevCount => prevCount - 1), 1000)
-
-    return ()=>clearInterval(countTimer)
+    return () => clearInterval(countTimer);
+    // eslint-disable-next-line
   }, [quizCountDown])
   
   let quizContent = (

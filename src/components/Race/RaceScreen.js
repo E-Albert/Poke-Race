@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import RaceBar from "./RaceBar";
 import Button from "../UI/Button";
 
@@ -6,12 +6,22 @@ function RaceScreen(props) {
 
     const [raceDistance, setRaceDistance] = useState(0)
 
-    function startRace() {
-        let timer = setInterval(() => {
-            console.log(raceDistance)
-             setRaceDistance(prevDistance=> prevDistance + 1)
-        }, 1000)
+  
+    let { startRace } = props
+    
+    function startRacing(startRace) {
+        console.log(startRace)
+       if (startRace) {let timer = setInterval(() => {
+           setRaceDistance(prevDistance=> prevDistance + 1)
+        }, 1000)}
+       
     }
+
+
+    useEffect(() => {
+        startRacing(startRace)
+
+    }, [startRace])
   return (
     <div>
       <div className="poke1">
@@ -27,7 +37,7 @@ function RaceScreen(props) {
         <img src={props.racerInfo.opponentPokePicture} alt="opponent pokemon" />
         <RaceBar raceFill={raceDistance} />
         <p>{props.racerInfo.opponentPokeName}</p>
-        <Button onClick={startRace}>RUN!</Button>
+        <Button onClick={startRacing}>RUN!</Button>
       </div>
     </div>
   );
