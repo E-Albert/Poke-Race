@@ -24,6 +24,7 @@ function App() {
   const [pokemonChosen, setPokemonChosen] = useState(false);
   const [pokemonInfo, setPokemonInfo] = useState({});
   const [preQuizClockAtZero, setPreQuizClockAtZero] = useState(false);
+  const [isUserCorrect, setIsUserCorrect] = useState()
 
   function clickHandler() {
     setHomePage(false);
@@ -49,6 +50,12 @@ function App() {
     }
   }
 
+  function wrongAnswerPenalty(answer) {
+    let penaltyApplied = answer
+    console.log(penaltyApplied)
+    setIsUserCorrect(penaltyApplied)
+  }
+
   return (
     <div>
       {homepage && <StartPage removeStartPage={clickHandler} />}
@@ -57,8 +64,8 @@ function App() {
       {!homepage && !pokemonChosen && (
         <Pokemon startQuiz={renderQuiz} grabPokeInfo={getPokeInfoHandler} />
       )}
-      {!homepage && pokemonChosen && <Quiz preQuiz={startRace} />}
-      {!homepage && pokemonChosen && <RaceScreen racerInfo={pokemonInfo} startRace={preQuizClockAtZero} />}
+      {!homepage && pokemonChosen && <Quiz preQuiz={startRace} questionPenalty={wrongAnswerPenalty} />}
+      {!homepage && pokemonChosen && <RaceScreen racerInfo={pokemonInfo} startRace={preQuizClockAtZero} applyPenalty={isUserCorrect} />}
     </div>
   );
 }

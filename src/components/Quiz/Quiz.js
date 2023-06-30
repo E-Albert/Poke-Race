@@ -5,14 +5,24 @@ import Button from "../UI/Button";
 function Quiz(props) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizCountDown, setQuizCountDown] = useState(5)
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(0)
+  const [numberCorrect, setNumberCorrect] = useState(0)
+  const [numberWrong, setNumberWrong] = useState(0)
 
+  console.log(isAnswerCorrect)
+  
   function checkAnswer(event) {
     console.log(event.target.value);
     if (event.target.value === pokeQuestions[currentQuestion].answer) {
       console.log("Hooray, +1 point for you!");
+      setIsAnswerCorrect(1)
+      setNumberCorrect(prevNumCorrect => prevNumCorrect + 1)
     } else {
       console.log("Darn, try again next time.");
+      setIsAnswerCorrect(2)
+      setNumberWrong(prevNumWrong => prevNumWrong + 1)
     }
+    props.questionPenalty(isAnswerCorrect)
     nextQuestion();
   }
 
@@ -51,7 +61,10 @@ function Quiz(props) {
 
   return (
     <div>
-      {quizCountDown === 0? quizContent : `The race starts in ${quizCountDown}`}
+      {quizCountDown === 0
+        ? quizContent
+        : `The race starts in ${quizCountDown}`}
+      
     </div>
   );
 }

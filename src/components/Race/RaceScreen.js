@@ -1,42 +1,45 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import RaceBar from "./RaceBar";
-import Button from "../UI/Button";
 
 let userTimer;
-let opponentTimer
+let opponentTimer;
 function RaceScreen(props) {
+  const [userRaceDistance, setUserRaceDistance] = useState(0);
+  const [opponentRaceDistance, setOpponentRaceDistance] = useState(0);
 
-    const [userRaceDistance, setUserRaceDistance] = useState(0)
-    const [opponentRaceDistance, setOpponentRaceDistance] = useState(0)
+  let { startRace } = props;
+  let { applyPenalty } = props;
 
-    if (userRaceDistance === 100 || opponentRaceDistance === 100) {
-        clearInterval(userTimer)
-        clearInterval(opponentTimer)
+  if (userRaceDistance === 100 || opponentRaceDistance === 100) {
+    clearInterval(userTimer);
+    clearInterval(opponentTimer);
+  }    
+
+  function startRacing(startRace) {
+    console.log(startRace);
+    if (startRace) {
+      userTimer = setInterval(() => {
+        setUserRaceDistance((prevDistance) => prevDistance + 1);
+      }, 1000);
     }
-  
-    let { startRace } = props
+
+    if (startRace) {
+      opponentTimer = setInterval(() => {
+        setOpponentRaceDistance((prevDistance) => prevDistance + 1);
+      }, 1000);
+    }
+  }
+
+  useEffect(() => {
+    startRacing(startRace);
+  }, [startRace]);
+
     
-    function startRacing(startRace) {
-        console.log(startRace)
-        if (startRace) {
-            userTimer = setInterval(() => {
-           setUserRaceDistance(prevDistance=> prevDistance + 1)
-        }, 1000)}
-        
-        if (startRace) {
-          opponentTimer = setInterval(() => {
-            setOpponentRaceDistance((prevDistance) => prevDistance + 1);
-          }, 1000);
-        }
-        
-       
-    }
-
-
     useEffect(() => {
-        startRacing(startRace)
-
-    }, [startRace])
+        if (applyPenalty === 2) {
+     setUserRaceDistance((prevDistance) => prevDistance - 5);
+  }
+    }, [applyPenalty])
   return (
     <div>
       <div className="poke1">
@@ -44,8 +47,8 @@ function RaceScreen(props) {
         <RaceBar raceFill={userRaceDistance} />
         <p>
           {props.racerInfo.pokeName}
-                  {userRaceDistance}
-                  {opponentRaceDistance}
+          {userRaceDistance}
+          {opponentRaceDistance}
         </p>
       </div>
       <div>VS</div>
@@ -53,7 +56,6 @@ function RaceScreen(props) {
         <img src={props.racerInfo.opponentPokePicture} alt="opponent pokemon" />
         <RaceBar raceFill={opponentRaceDistance} />
         <p>{props.racerInfo.opponentPokeName}</p>
-        <Button onClick={startRacing}>RUN!</Button>
       </div>
     </div>
   );
