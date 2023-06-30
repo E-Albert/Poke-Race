@@ -2,22 +2,33 @@ import React, {useState, useEffect} from "react";
 import RaceBar from "./RaceBar";
 import Button from "../UI/Button";
 
-let timer;
+let userTimer;
+let opponentTimer
 function RaceScreen(props) {
 
-    const [raceDistance, setRaceDistance] = useState(95)
+    const [userRaceDistance, setUserRaceDistance] = useState(0)
+    const [opponentRaceDistance, setOpponentRaceDistance] = useState(0)
 
-    if (raceDistance === 100) {
-        clearInterval(timer)
+    if (userRaceDistance === 100 || opponentRaceDistance === 100) {
+        clearInterval(userTimer)
+        clearInterval(opponentTimer)
     }
   
     let { startRace } = props
     
     function startRacing(startRace) {
         console.log(startRace)
-       if (startRace) { timer = setInterval(() => {
-           setRaceDistance(prevDistance=> prevDistance + 1)
+        if (startRace) {
+            userTimer = setInterval(() => {
+           setUserRaceDistance(prevDistance=> prevDistance + 1)
         }, 1000)}
+        
+        if (startRace) {
+          opponentTimer = setInterval(() => {
+            setOpponentRaceDistance((prevDistance) => prevDistance + 1);
+          }, 1000);
+        }
+        
        
     }
 
@@ -30,16 +41,17 @@ function RaceScreen(props) {
     <div>
       <div className="poke1">
         <img src={props.racerInfo.pokePicture} alt="user pokemon" />
-        <RaceBar raceFill={raceDistance} />
+        <RaceBar raceFill={userRaceDistance} />
         <p>
           {props.racerInfo.pokeName}
-          {raceDistance}
+                  {userRaceDistance}
+                  {opponentRaceDistance}
         </p>
       </div>
       <div>VS</div>
       <div className="poke2">
         <img src={props.racerInfo.opponentPokePicture} alt="opponent pokemon" />
-        <RaceBar raceFill={raceDistance} />
+        <RaceBar raceFill={opponentRaceDistance} />
         <p>{props.racerInfo.opponentPokeName}</p>
         <Button onClick={startRacing}>RUN!</Button>
       </div>
