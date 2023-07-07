@@ -8,7 +8,6 @@ import Quiz from "./components/Quiz/Quiz";
 import RaceScreen from "./components/Race/RaceScreen";
 
 /*-add styling with tailwind css
-  -set timer and add/subtract time based on user answer
   -find ways to add animation
   -add highscores page
   -add results page after quiz ends
@@ -25,7 +24,8 @@ function App() {
   const [pokemonInfo, setPokemonInfo] = useState({});
   const [preQuizClockAtZero, setPreQuizClockAtZero] = useState(false);
   const [isUserCorrect, setIsUserCorrect] = useState()
-
+  const [isGameOver, setIsGameOver] = useState(false)
+ 
   function clickHandler() {
     setHomePage(false);
   }
@@ -56,6 +56,12 @@ function App() {
     setIsUserCorrect(penaltyApplied)
   }
 
+  function gameOver(raceFinished) {
+    if (raceFinished) {
+      setIsGameOver(true)
+    }
+  }
+
   return (
     <div>
       {homepage && <StartPage removeStartPage={clickHandler} />}
@@ -64,8 +70,8 @@ function App() {
       {!homepage && !pokemonChosen && (
         <Pokemon startQuiz={renderQuiz} grabPokeInfo={getPokeInfoHandler} />
       )}
-      {!homepage && pokemonChosen && <Quiz preQuiz={startRace} questionPenalty={wrongAnswerPenalty} />}
-      {!homepage && pokemonChosen && <RaceScreen racerInfo={pokemonInfo} startRace={preQuizClockAtZero} applyPenalty={isUserCorrect} />}
+      {!homepage && pokemonChosen && <Quiz preQuiz={startRace} questionPenalty={wrongAnswerPenalty} raceIsOver={isGameOver} />}
+      {!homepage && pokemonChosen && <RaceScreen racerInfo={pokemonInfo} startRace={preQuizClockAtZero} applyPenalty={isUserCorrect} raceOver={gameOver} />}
     </div>
   );
 }

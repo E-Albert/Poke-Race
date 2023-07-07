@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import pokeQuestions from "./Questions";
 import Button from "../UI/Button";
+import QuizResults from "./QuizResults";
 
 function Quiz(props) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -8,8 +9,12 @@ function Quiz(props) {
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(0)
   const [numberCorrect, setNumberCorrect] = useState(0)
   const [numberWrong, setNumberWrong] = useState(0)
+  const [showResults, setShowResults] = useState(false)
+  const [totalQuestions, setTotalQuestions] = useState(0)
 
   console.log(isAnswerCorrect)
+  let {raceIsOver} = props
+
   
   function checkAnswer(event) {
     console.log(event.target.value);
@@ -17,10 +22,13 @@ function Quiz(props) {
       console.log("Hooray, +1 point for you!");
       setIsAnswerCorrect(1)
       setNumberCorrect(prevNumCorrect => prevNumCorrect + 1)
+      setTotalQuestions(prevTotal => prevTotal + 1)
     } else {
       console.log("Darn, try again next time.");
       setIsAnswerCorrect(2)
       setNumberWrong(prevNumWrong => prevNumWrong + 1)
+      setTotalQuestions((prevTotal) => prevTotal + 1);
+
     }
     props.questionPenalty(isAnswerCorrect)
     nextQuestion();
@@ -31,6 +39,7 @@ function Quiz(props) {
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
     } else {
       console.log("gameover");
+      setShowResults(true)
     }
   }
 
@@ -41,10 +50,17 @@ function Quiz(props) {
     if (quizCountDown === 0) {
       props.preQuiz(true);
     }
-
+    
     return () => clearInterval(countTimer);
     // eslint-disable-next-line
   }, [quizCountDown])
+
+  useEffect(() => {
+    if (raceIsOver) {
+      setShowResults(true);
+    }
+  }, [showResults, raceIsOver]);
+
   
   let quizContent = (
     <div>
@@ -61,10 +77,11 @@ function Quiz(props) {
 
   return (
     <div>
-      {quizCountDown === 0
-        ? quizContent
-        : `The race starts in ${quizCountDown}`}
-      
+      {quizCountDown === 0 && showResults === false && quizContent}
+      {quizCountDown !== 0 && showResults === false && `The race starts in ${quizCountDown}`}
+      {showResults && (
+        <QuizResults correct={numberCorrect} wrong={numberWrong} total={totalQuestions} />
+      )}
     </div>
   );
 }

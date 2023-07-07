@@ -12,7 +12,8 @@ function RaceScreen(props) {
 
   if (userRaceDistance === 100 || opponentRaceDistance === 100) {
     clearInterval(userTimer);
-    clearInterval(opponentTimer);
+      clearInterval(opponentTimer);
+      props.raceOver(true)
   }    
 
   function startRacing(startRace) {
