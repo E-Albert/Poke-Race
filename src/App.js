@@ -7,6 +7,7 @@ import InstructionsModal from "./components/UI/InstructionsModal";
 import Quiz from "./components/Quiz/Quiz";
 import RaceScreen from "./components/Race/RaceScreen";
 
+
 /*-add styling with tailwind css
   -find ways to add animation
   -add highscores page
@@ -63,15 +64,28 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="">
       {homepage && <StartPage removeStartPage={clickHandler} />}
       {!homepage && modal && <InstructionsModal removeModal={modalHandler} />}
       {!homepage && <Header />}
       {!homepage && !pokemonChosen && (
         <Pokemon startQuiz={renderQuiz} grabPokeInfo={getPokeInfoHandler} />
       )}
-      {!homepage && pokemonChosen && <Quiz preQuiz={startRace} questionPenalty={wrongAnswerPenalty} raceIsOver={isGameOver} />}
-      {!homepage && pokemonChosen && <RaceScreen racerInfo={pokemonInfo} startRace={preQuizClockAtZero} applyPenalty={isUserCorrect} raceOver={gameOver} />}
+      {!homepage && pokemonChosen && (
+        <Quiz
+          preQuiz={startRace}
+          questionPenalty={wrongAnswerPenalty}
+          raceIsOver={isGameOver}
+        />
+      )}
+      {!homepage && pokemonChosen && (
+        <RaceScreen
+          racerInfo={pokemonInfo}
+          startRace={preQuizClockAtZero}
+          applyPenalty={isUserCorrect}
+          raceOver={gameOver}
+        />
+      )}
     </div>
   );
 }
