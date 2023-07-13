@@ -56,7 +56,7 @@ function Opponent(props) {
           <p>First Attack: {opponentPokemon.opponentPokeMoveOne}</p>
           <p>Second Attack: {opponentPokemon.opponentPokeMoveTwo}</p>
           <p>Type: {opponentPokemon.opponentPokeType}</p>
-          <img
+          <img className="m-auto"
             src={opponentPokemon.opponentPokePicture}
             alt="opponent pokemon facing forward"
           />

@@ -68,10 +68,10 @@ function Pokemon(props) {
   }, [theOpponent, userPokemon, opponentData])
 
   return (
-    <div className="pokeDiv">
+    <div className="text-center bg-blue-50/[.75] w-1/3 m-auto p-2">
       {showForm && (
         <form id="pokeForm" onSubmit={chooseOpponent}>
-          <label>Choose your Pokemon</label>
+          <label>Choose your Pokemon: </label>
           <select onChange={userChoice}>
             <option value="pikachu">Pikachu</option>
             <option value="charizard">Charizard</option>
@@ -91,7 +91,7 @@ function Pokemon(props) {
       <p>First Attack: {userPokemon.pokeMoveOne}</p>
       <p>Second Attack: {userPokemon.pokeMoveTwo}</p>
       <p>Type: {userPokemon.pokeType}</p>
-      <img src={userPokemon.pokePicture} alt="pokemon facing forward" />
+      <img className="w-[96px] m-auto" src={userPokemon.pokePicture} alt="pokemon facing forward" />
       <br />
       {showForm && (
         <Button type="submit" form="pokeForm">
