@@ -5,32 +5,30 @@ import QuizResults from "./QuizResults";
 
 function Quiz(props) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [quizCountDown, setQuizCountDown] = useState(5)
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState(0)
-  const [numberCorrect, setNumberCorrect] = useState(0)
-  const [numberWrong, setNumberWrong] = useState(0)
-  const [showResults, setShowResults] = useState(false)
-  const [totalQuestions, setTotalQuestions] = useState(0)
+  const [quizCountDown, setQuizCountDown] = useState(5);
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(0);
+  const [numberCorrect, setNumberCorrect] = useState(0);
+  const [numberWrong, setNumberWrong] = useState(0);
+  const [showResults, setShowResults] = useState(false);
+  const [totalQuestions, setTotalQuestions] = useState(0);
 
-  console.log(isAnswerCorrect)
-  let {raceIsOver} = props
+  console.log(isAnswerCorrect);
+  let { raceIsOver } = props;
 
-  
   function checkAnswer(event) {
     console.log(event.target.value);
     if (event.target.value === pokeQuestions[currentQuestion].answer) {
       console.log("Hooray, +1 point for you!");
-      setIsAnswerCorrect(1)
-      setNumberCorrect(prevNumCorrect => prevNumCorrect + 1)
-      setTotalQuestions(prevTotal => prevTotal + 1)
+      setIsAnswerCorrect(1);
+      setNumberCorrect((prevNumCorrect) => prevNumCorrect + 1);
+      setTotalQuestions((prevTotal) => prevTotal + 1);
     } else {
       console.log("Darn, try again next time.");
-      setIsAnswerCorrect(2)
-      setNumberWrong(prevNumWrong => prevNumWrong + 1)
+      setIsAnswerCorrect(2);
+      setNumberWrong((prevNumWrong) => prevNumWrong + 1);
       setTotalQuestions((prevTotal) => prevTotal + 1);
-
     }
-    props.questionPenalty(isAnswerCorrect)
+    props.questionPenalty(isAnswerCorrect);
     nextQuestion();
   }
 
@@ -39,7 +37,7 @@ function Quiz(props) {
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
     } else {
       console.log("gameover");
-      setShowResults(true)
+      setShowResults(true);
     }
   }
 
@@ -50,10 +48,10 @@ function Quiz(props) {
     if (quizCountDown === 0) {
       props.preQuiz(true);
     }
-    
+
     return () => clearInterval(countTimer);
     // eslint-disable-next-line
-  }, [quizCountDown])
+  }, [quizCountDown]);
 
   useEffect(() => {
     if (raceIsOver) {
@@ -61,11 +59,10 @@ function Quiz(props) {
     }
   }, [showResults, raceIsOver]);
 
-  
   let quizContent = (
-    <div>
-      <div className="question">{pokeQuestions[currentQuestion].title}</div>
-      <div className="answers">
+    <div className="">
+      <div className="mb-5">{pokeQuestions[currentQuestion].title}</div>
+      <div className=" flex flex-col gap-3 w-1/2 m-auto pb-10">
         {pokeQuestions[currentQuestion].choices.map((choice) => (
           <Button key={choice} onClick={checkAnswer} value={choice}>
             {choice}
@@ -76,11 +73,17 @@ function Quiz(props) {
   );
 
   return (
-    <div>
+    <div className="w-1/2 float-right text-center bg-blue-50/[.75]">
       {quizCountDown === 0 && showResults === false && quizContent}
-      {quizCountDown !== 0 && showResults === false && `The race starts in ${quizCountDown}`}
+      {quizCountDown !== 0 &&
+        showResults === false &&
+        `The race starts in ${quizCountDown}`}
       {showResults && (
-        <QuizResults correct={numberCorrect} wrong={numberWrong} total={totalQuestions} />
+        <QuizResults
+          correct={numberCorrect}
+          wrong={numberWrong}
+          total={totalQuestions}
+        />
       )}
     </div>
   );

@@ -71,19 +71,19 @@ function App() {
       {!homepage && !pokemonChosen && (
         <Pokemon startQuiz={renderQuiz} grabPokeInfo={getPokeInfoHandler} />
       )}
+        {!homepage && pokemonChosen && (
+          <RaceScreen
+            racerInfo={pokemonInfo}
+            startRace={preQuizClockAtZero}
+            applyPenalty={isUserCorrect}
+            raceOver={gameOver}
+          />
+        )}
       {!homepage && pokemonChosen && (
         <Quiz
           preQuiz={startRace}
           questionPenalty={wrongAnswerPenalty}
           raceIsOver={isGameOver}
-        />
-      )}
-      {!homepage && pokemonChosen && (
-        <RaceScreen
-          racerInfo={pokemonInfo}
-          startRace={preQuizClockAtZero}
-          applyPenalty={isUserCorrect}
-          raceOver={gameOver}
         />
       )}
     </div>
