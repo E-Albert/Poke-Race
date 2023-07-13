@@ -5,13 +5,13 @@ function InstructionsModal(props) {
   return (
     <div>
       <div className="backdrop"></div>
-      <div className="modal">
-        <h2>Welcome to Poké-Race</h2>
+      <div className="bg-blue-50 text-center z-50 w-2/5 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-3xl p-10">
+        <h2 className="text-2xl">Welcome to Poké-Race</h2>
         <br />
-        <h4>Here's how to play</h4>
+        <h4 className="underline mb-3">Here's how to play</h4>
         <p>
           Select a Pokemon to race with. Your opponent will be randomly chosen.
-          Answer questions correctly to avoid being attacked by your opponent.
+          Answer questions correctly to avoid being attacked by your opponent. Five correct answers in a row allows you to attack your opponent.
           First to the finish line wins!
         </p>
         <br />
