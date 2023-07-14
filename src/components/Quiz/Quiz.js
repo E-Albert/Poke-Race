@@ -73,7 +73,7 @@ function Quiz(props) {
   );
 
   return (
-    <div className="w-1/2 float-right text-center bg-blue-50/[.75]">
+    <div className="w-1/2  h-2/4 float-right text-center bg-blue-50/[.75] p-5">
       {quizCountDown === 0 && showResults === false && quizContent}
       {quizCountDown !== 0 &&
         showResults === false &&

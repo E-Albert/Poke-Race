@@ -8,12 +8,10 @@ import Quiz from "./components/Quiz/Quiz";
 import RaceScreen from "./components/Race/RaceScreen";
 
 
-/*-add styling with tailwind css
+/*
   -find ways to add animation
   -add highscores page
-  -add results page after quiz ends
   -adjust app for mobile
-  -find way to be attacked by opponent pokemon
   -fix attacks to be unique
   -loading image
   */
@@ -64,7 +62,7 @@ function App() {
   }
 
   return (
-    <div className="">
+    <div className="h-screen">
       {homepage && <StartPage removeStartPage={clickHandler} />}
       {!homepage && modal && <InstructionsModal removeModal={modalHandler} />}
       {!homepage && <Header />}
