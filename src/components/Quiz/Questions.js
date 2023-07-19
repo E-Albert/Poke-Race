@@ -177,6 +177,112 @@ let pokeQuestions = [
     choices: ["Red", "Yellow", "Pink", "Orange"],
     answer: "Red",
   },
+  {
+    title: "What type of Pokemon is Rattata?",
+    choices: ["Ice", "Ghost", "Normal", "Fairy"],
+    answer: "Normal",
+  },
+  {
+    title: "What type of Pokemon are mainly yellow?",
+    choices: ["Flying", "Grass", "Electric", "Water"],
+    answer: "Electric",
+  },
+  {
+    title: "What species is Pikachu?",
+    choices: ["Rat", "Mouse", "Hamster", "Gerbil"],
+    answer: "Mouse",
+  },
+  {
+    title: "Which of the following is a Dark type Pokemon",
+    choices: ["Politoed", "Espeon", "Aipom", "Umbreon"],
+    answer: "Umbreon",
+  },
+  {
+    title: "Which of the following is a Poison type Pokemon",
+    choices: ["Raichu", "Ekans", "Sandslash", "Raticate"],
+    answer: "Ekans",
+  },
+  {
+    title: "Who is the leader of Team Rocket?",
+    choices: ["Giovanni", "Luigi", "Mario", "Guiseppe"],
+    answer: "Giovanni",
+  },
+  {
+    title: "Which Pokemon evolves into Dugtrio?",
+    choices: ["Diglott", "Diglett", "Digsitt", "Diglatt"],
+    answer: "Diglett",
+  },
+  {
+    title: "How many original Pokemon were there?",
+    choices: ["131", "161", "141", "151"],
+    answer: "151",
+  },
+  {
+    title:
+      "What does the winning Pokemon get at the end of a toughness contest?",
+    choices: ["Stone", "Rosette", "Badge", "Ribbon"],
+    answer: "Ribbon",
+  },
+  {
+    title: "Which of the following Pokemon types doesn't exist?",
+    choices: ["Glass", "Dragon", "Fairy", "Ice"],
+    answer: "Glass",
+  },
+  {
+    title: 'Fill in the blank. "I want to be _____"',
+    choices: [
+      "Amazing",
+      "The ultimate Pokemon catcher",
+      "The very best",
+      "Pikachu's best friend",
+    ],
+    answer: "The very best",
+  },
+  {
+    title: "How many evolutions does Eevee have?",
+    choices: ["2", "4", "6", "8"],
+    answer: "8",
+  },
+  {
+    title: "Which Pokemon is Misty's main Pokemon?",
+    choices: ["Staryu", "Ekans", "Pikachu", "Togepi"],
+    answer: "Staryu",
+  },
+  {
+    title: "What is Squirtle's final evolution?",
+    choices: ["Ivysaur", "Blastoise", "Wartortle", "Bulbasaur"],
+    answer: "Blastoise",
+  },
+  {
+    title: "How old is Ash in the beginning of the series?",
+    choices: ["5", "12", "15", "10"],
+    answer: "10",
+  },
+  {
+    title: "How many types of Pokeballs are there?",
+    choices: ["4", "13", "20", "27"],
+    answer: "27",
+  },
+  {
+    title: "Whos is Ash's rival?",
+    choices: ["Brock", "Gary", "Chris", "Ashley"],
+    answer: "Gary",
+  },
+  {
+    title: "What does Pokemon mean?",
+    choices: ["Pocket monsters", "Nothing", "Little creatures", "Element animals"],
+    answer: "Pocket monsters",
+  },
+  {
+    title: "What Pokemon doesn't have eyes?",
+    choices: ["Caterpie", "Jinx", "Zubat", "Ponyta"],
+    answer: "Zubat",
+  },
+  {
+    title: "Where does Pokemon originate from?",
+    choices: ["China", "America", "Austrailia", "Japan"],
+    answer: "Japan",
+  },
 ];
 
 export default pokeQuestions;
