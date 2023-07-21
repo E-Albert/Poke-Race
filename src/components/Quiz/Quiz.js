@@ -41,6 +41,13 @@ function Quiz(props) {
     }
   }
 
+  function resetQuiz() {
+    setQuizCountDown(5)
+    setNumberCorrect(0)
+    setNumberWrong(0)
+    setShowResults(false)
+  } 
+
   useEffect(() => {
     const countTimer =
       quizCountDown > 0 &&
@@ -83,6 +90,8 @@ function Quiz(props) {
           correct={numberCorrect}
           wrong={numberWrong}
           total={totalQuestions}
+          playOnceMore={props.playAgain}
+          resetTheQuiz={resetQuiz}
         />
       )}
     </div>

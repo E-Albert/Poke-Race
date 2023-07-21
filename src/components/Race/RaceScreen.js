@@ -4,8 +4,8 @@ import RaceBar from "./RaceBar";
 let userTimer;
 let opponentTimer;
 function RaceScreen(props) {
-  const [userRaceDistance, setUserRaceDistance] = useState(0);
-  const [opponentRaceDistance, setOpponentRaceDistance] = useState(0);
+  const [userRaceDistance, setUserRaceDistance] = useState(95);
+  const [opponentRaceDistance, setOpponentRaceDistance] = useState(95);
 
   let { startRace } = props;
   let { applyPenalty } = props;

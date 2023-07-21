@@ -61,6 +61,12 @@ function App() {
     }
   }
 
+  function playAgain() {
+    setPokemonChosen(false)
+    setPreQuizClockAtZero(false)
+    setIsGameOver(false)
+  }
+
   return (
     <div className="h-screen">
       {homepage && <StartPage removeStartPage={clickHandler} />}
@@ -82,6 +88,7 @@ function App() {
           preQuiz={startRace}
           questionPenalty={wrongAnswerPenalty}
           raceIsOver={isGameOver}
+          playAgain={playAgain}
         />
       )}
     </div>
