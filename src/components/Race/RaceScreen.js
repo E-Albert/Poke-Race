@@ -42,7 +42,7 @@ function RaceScreen(props) {
   }
     }, [applyPenalty])
   return (
-    <div className="m-auto w-4/5 md:w-1/2 h-2/5 md:h-1/2 bg-blue-50/[.75] md:inline-block p-2 mb-1">
+    <div className="m-auto w-4/5 md:w-1/2 h-[45%] md:h-1/2 bg-blue-50/[.75] md:inline-block p-2 mb-1">
       <div className="">
         <img src={props.racerInfo.pokePicture} alt="user pokemon" />
         <RaceBar raceFill={userRaceDistance} />
