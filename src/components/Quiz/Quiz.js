@@ -80,7 +80,7 @@ function Quiz(props) {
   );
 
   return (
-    <div className="w-1/2  h-2/4 float-right text-center bg-blue-50/[.75] p-5">
+    <div className="overflow-scroll w-4/5 m-auto md:w-1/2  h-2/5 md:h-1/2 md:float-right text-center bg-blue-50/[.75] p-5">
       {quizCountDown === 0 && showResults === false && quizContent}
       {quizCountDown !== 0 &&
         showResults === false &&

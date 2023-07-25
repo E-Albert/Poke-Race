@@ -68,7 +68,7 @@ function App() {
   }
 
   return (
-    <div className="h-screen">
+    <div className="h-screen overflow-scroll">
       {homepage && <StartPage removeStartPage={clickHandler} />}
       {!homepage && modal && <InstructionsModal removeModal={modalHandler} />}
       {!homepage && <Header />}

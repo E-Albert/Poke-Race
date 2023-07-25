@@ -4,8 +4,8 @@ import RaceBar from "./RaceBar";
 let userTimer;
 let opponentTimer;
 function RaceScreen(props) {
-  const [userRaceDistance, setUserRaceDistance] = useState(95);
-  const [opponentRaceDistance, setOpponentRaceDistance] = useState(95);
+  const [userRaceDistance, setUserRaceDistance] = useState(0);
+  const [opponentRaceDistance, setOpponentRaceDistance] = useState(0);
 
   let { startRace } = props;
   let { applyPenalty } = props;
@@ -42,17 +42,17 @@ function RaceScreen(props) {
   }
     }, [applyPenalty])
   return (
-    <div className="w-1/2 h-1/2 bg-blue-50/[.75] inline-block p-2">
+    <div className="m-auto w-4/5 md:w-1/2 h-2/5 md:h-1/2 bg-blue-50/[.75] md:inline-block p-2 mb-1">
       <div className="">
         <img src={props.racerInfo.pokePicture} alt="user pokemon" />
         <RaceBar raceFill={userRaceDistance} />
-        <p>
+        <p className="mb-10">
           {props.racerInfo.pokeName}
-          {userRaceDistance}
-          {opponentRaceDistance}
+          {/* {userRaceDistance}
+          {opponentRaceDistance} */}
         </p>
       </div>
-      <div>VS</div>
+      <div className="text-center">VS</div>
       <div className="">
         <img src={props.racerInfo.opponentPokePicture} alt="opponent pokemon" />
         <RaceBar raceFill={opponentRaceDistance} />
