@@ -145,7 +145,7 @@ let pokeQuestions = [
   {
     title: "Which of the following is a Fairy Pokemon?",
     choices: ["Zubat", "Clefairy", "Sandslash", "Vulpix"],
-    answer: "Grass",
+    answer: "Clefairy",
   },
   {
     title: "Espeon is what type of Pokemon?",

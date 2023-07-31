@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import RaceBar from "./RaceBar";
+import RaceWinner from "./RaceWinner";
 
 let userTimer;
 let opponentTimer;
+
 function RaceScreen(props) {
-  const [userRaceDistance, setUserRaceDistance] = useState(0);
-  const [opponentRaceDistance, setOpponentRaceDistance] = useState(0);
+  const [userRaceDistance, setUserRaceDistance] = useState(95);
+  const [opponentRaceDistance, setOpponentRaceDistance] = useState(95);
+  const [displayWinner, setDisplayWinner] = useState(false)
+  const [pokeWinner, setPokeWinner] = useState({})
 
   let { startRace } = props;
   let { applyPenalty } = props;
-
-  if (userRaceDistance === 100 || opponentRaceDistance === 100) {
-    clearInterval(userTimer);
-      clearInterval(opponentTimer);
-      props.raceOver(true)
-  }    
+  let { raceOver } = props;
+  let { racerInfo } = props;
 
   function startRacing(startRace) {
     console.log(startRace);
@@ -36,6 +36,31 @@ function RaceScreen(props) {
   }, [startRace]);
 
     
+  useEffect(() => {
+    if (userRaceDistance === 100) {
+      setDisplayWinner(true)
+      clearInterval(userTimer);
+      clearInterval(opponentTimer);
+      raceOver(true);
+      setPokeWinner({
+        name: racerInfo.pokeName,
+        picture: racerInfo.pokePicture,
+      });
+    }    
+
+    if (opponentRaceDistance === 100) {
+      setDisplayWinner(true);
+      clearInterval(userTimer);
+      clearInterval(opponentTimer);
+      raceOver(true);
+      setPokeWinner({
+        name: racerInfo.opponentPokeName,
+        picture: racerInfo.opponentPokePicture,
+      });
+    }  
+    
+  }, [userRaceDistance, opponentRaceDistance, raceOver, racerInfo])
+
     useEffect(() => {
         if (applyPenalty === 2) {
      setUserRaceDistance((prevDistance) => prevDistance - 5);
@@ -43,13 +68,15 @@ function RaceScreen(props) {
     }, [applyPenalty])
   return (
     <div className="m-auto w-4/5 md:w-1/2 h-[45%] md:h-1/2 bg-blue-50/[.75] md:inline-block p-2 mb-1">
+      {!displayWinner &&
+     <div>   
       <div className="">
         <img src={props.racerInfo.pokePicture} alt="user pokemon" />
         <RaceBar raceFill={userRaceDistance} />
         <p className="mb-10">
           {props.racerInfo.pokeName}
-          {/* {userRaceDistance}
-          {opponentRaceDistance} */}
+          {userRaceDistance}
+          {opponentRaceDistance}
         </p>
       </div>
       <div className="text-center">VS</div>
@@ -57,7 +84,10 @@ function RaceScreen(props) {
         <img src={props.racerInfo.opponentPokePicture} alt="opponent pokemon" />
         <RaceBar raceFill={opponentRaceDistance} />
         <p>{props.racerInfo.opponentPokeName}</p>
-      </div>
+          </div>
+      </div>    
+      }
+      {displayWinner && <RaceWinner pokeWinnerName={pokeWinner.name} pokeWinnerPicture={pokeWinner.picture} />}
     </div>
   );
 }

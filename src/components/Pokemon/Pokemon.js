@@ -68,7 +68,7 @@ function Pokemon(props) {
   }, [theOpponent, userPokemon, opponentData])
 
   return (
-    <div className="text-center bg-blue-50/[.75] w-4/5 md:w-1/3 m-auto p-2 h-4/5">
+    <div className="text-center bg-blue-50/[.75] w-4/5 md:w-1/3 m-auto p-2 h-4/5 md:h-5/6">
       {showForm && (
         <form id="pokeForm" onSubmit={chooseOpponent}>
           <label>Choose your Pokemon: </label>

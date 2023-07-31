@@ -11,7 +11,6 @@ import RaceScreen from "./components/Race/RaceScreen";
 /*
   -find ways to add animation
   -add highscores page
-  -adjust app for mobile
   -fix attacks to be unique
   -loading image
   */
