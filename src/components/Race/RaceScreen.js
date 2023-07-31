@@ -6,8 +6,8 @@ let userTimer;
 let opponentTimer;
 
 function RaceScreen(props) {
-  const [userRaceDistance, setUserRaceDistance] = useState(95);
-  const [opponentRaceDistance, setOpponentRaceDistance] = useState(95);
+  const [userRaceDistance, setUserRaceDistance] = useState(0);
+  const [opponentRaceDistance, setOpponentRaceDistance] = useState(0);
   const [displayWinner, setDisplayWinner] = useState(false)
   const [pokeWinner, setPokeWinner] = useState({})
 
@@ -75,8 +75,8 @@ function RaceScreen(props) {
         <RaceBar raceFill={userRaceDistance} />
         <p className="mb-10">
           {props.racerInfo.pokeName}
-          {userRaceDistance}
-          {opponentRaceDistance}
+          {/* {userRaceDistance}
+          {opponentRaceDistance} */}
         </p>
       </div>
       <div className="text-center">VS</div>
