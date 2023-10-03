@@ -22,11 +22,42 @@ function Pokemon(props) {
       .then((data) => {
         console.log(data);
         //add switch case here for different pokemon names
+        let pokeMove;
+        switch (data.name) {
+          case "pikachu":
+            pokeMove = "Thunderbolt";
+            break;
+          case "charizard":
+            pokeMove = "Flamethrower";
+            break;
+          case "blastoise":
+            pokeMove = "Hydro Pump";
+            break;
+          case "venusaur":
+            pokeMove = "Razor Leaf";
+            break;
+          case "hitmonlee":
+            pokeMove = "Double Kick";
+            break;
+          case "arbok":
+            pokeMove = "Acid";
+            break;
+          case "alakazam":
+            pokeMove = "Confusion";
+            break;
+          case "golem":
+            pokeMove = "Earthquake";
+            break;
+          case "gengar":
+            pokeMove = "Shadow Ball";
+            break;
+          default: pokeMove = "Body Slam";
+        }
+        console.log(pokeMove)
         //hard code pokemon move, insert into object
         const transformedData = {
           pokeName: data.name.toUpperCase(),
-          pokeMoveOne: data.moves[0].move.name,
-          pokeMoveTwo: data.moves[1].move.name,
+          pokeMoveOne: pokeMove,
           pokeType:
             data.types[0].type.name.charAt(0).toUpperCase() +
             data.types[0].type.name.slice(1),
@@ -90,8 +121,7 @@ function Pokemon(props) {
       )}
       <br />
       <p>{userPokemon.pokeName}</p>
-      <p>First Attack: {userPokemon.pokeMoveOne}</p>
-      <p>Second Attack: {userPokemon.pokeMoveTwo}</p>
+      <p>Move: {userPokemon.pokeMoveOne}</p>
       <p>Type: {userPokemon.pokeType}</p>
       <img className="w-[96px] m-auto" src={userPokemon.pokePicture} alt="pokemon facing forward" />
       <br />
