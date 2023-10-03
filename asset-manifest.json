@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Poke-Race/static/css/main.8e8a73f7.css",
-    "main.js": "/Poke-Race/static/js/main.a6c4cb12.js",
+    "main.css": "/Poke-Race/static/css/main.8408a58d.css",
+    "main.js": "/Poke-Race/static/js/main.deecf105.js",
     "static/media/pokeballs.webp": "/Poke-Race/static/media/pokeballs.be3db3bb1a63c4186501.webp",
     "index.html": "/Poke-Race/index.html",
-    "main.8e8a73f7.css.map": "/Poke-Race/static/css/main.8e8a73f7.css.map",
-    "main.a6c4cb12.js.map": "/Poke-Race/static/js/main.a6c4cb12.js.map"
+    "main.8408a58d.css.map": "/Poke-Race/static/css/main.8408a58d.css.map",
+    "main.deecf105.js.map": "/Poke-Race/static/js/main.deecf105.js.map"
   },
   "entrypoints": [
-    "static/css/main.8e8a73f7.css",
-    "static/js/main.a6c4cb12.js"
+    "static/css/main.8408a58d.css",
+    "static/js/main.deecf105.js"
   ]
 }
