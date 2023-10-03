@@ -26,10 +26,41 @@ function Opponent(props) {
         .then((data) => {
           setIsLoading(false);
           console.log(data);
+          let opponentMove;
+          switch (data.name) {
+            case "magneton":
+              opponentMove = "Spark";
+              break;
+            case "magmar":
+              opponentMove = "Fire Blast";
+              break;
+            case "gyarados":
+              opponentMove = "Waterfall";
+              break;
+            case "exeggutor":
+              opponentMove = "Bullet Seed";
+              break;
+            case "clefable":
+              opponentMove = "Moonblast";
+              break;
+            case "hitmonchan":
+              opponentMove = "Mach Punch";
+              break;
+            case "weezing":
+              opponentMove = "Sludge Bomb";
+              break;
+            case "onix":
+              opponentMove = "Rock Throw";
+              break;
+            case "mr-mime":
+              opponentMove = "Psybeam";
+              break;
+            default:
+              opponentMove = "Fury Swipes";
+          }
           const opponentTransformedData = {
             opponentPokeName: data.name.toUpperCase(),
-            opponentPokeMoveOne: data.moves[0].move.name,
-            opponentPokeMoveTwo: data.moves[1].move.name,
+            opponentPokeMoveOne: opponentMove,
             opponentPokeType:
               data.types[0].type.name.charAt(0).toUpperCase() +
               data.types[0].type.name.slice(1),
@@ -53,8 +84,7 @@ function Opponent(props) {
       {!isLoading && (
         <div>
           <p>{opponentPokemon.opponentPokeName}</p>
-          <p>First Attack: {opponentPokemon.opponentPokeMoveOne}</p>
-          <p>Second Attack: {opponentPokemon.opponentPokeMoveTwo}</p>
+          <p>Move: {opponentPokemon.opponentPokeMoveOne}</p>
           <p>Type: {opponentPokemon.opponentPokeType}</p>
           <img className="m-auto"
             src={opponentPokemon.opponentPokePicture}
