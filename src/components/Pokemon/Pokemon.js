@@ -21,6 +21,8 @@ function Pokemon(props) {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        //add switch case here for different pokemon names
+        //hard code pokemon move, insert into object
         const transformedData = {
           pokeName: data.name.toUpperCase(),
           pokeMoveOne: data.moves[0].move.name,
