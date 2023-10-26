@@ -12,6 +12,7 @@ function Quiz(props) {
   const [showResults, setShowResults] = useState(false);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0)
+  const [shuffledQuestions, setShuffledQuestions] = useState([])
 
   console.log(isAnswerCorrect);
   let { raceIsOver } = props;
@@ -19,7 +20,7 @@ function Quiz(props) {
 
   function checkAnswer(event) {
     console.log(event.target.value);
-    if (event.target.value === pokeQuestions[currentQuestion].answer) {
+    if (event.target.value === shuffledQuestions[currentQuestion].answer) {
       console.log("Hooray, +1 point for you!");
       setIsAnswerCorrect(1);
       setNumberCorrect((prevNumCorrect) => prevNumCorrect + 1);
@@ -39,7 +40,7 @@ function Quiz(props) {
   console.log(consecutiveCorrect)
 
   function nextQuestion() {
-    if (currentQuestion < pokeQuestions.length - 1) {
+    if (currentQuestion < shuffledQuestions.length - 1) {
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
     } else {
       console.log("gameover");
@@ -79,22 +80,42 @@ function Quiz(props) {
     }
   }, [consecutiveCorrect, userAttack])
 
-  let quizContent = (
-    <div className="">
-      <div className="mb-5">{pokeQuestions[currentQuestion].title}</div>
-      <div className=" flex flex-col gap-3 w-1/2 m-auto pb-10">
-        {pokeQuestions[currentQuestion].choices.map((choice) => (
-          <Button key={choice} onClick={checkAnswer} value={choice}>
-            {choice}
-          </Button>
-        ))}
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const shuffled = [...pokeQuestions];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    setShuffledQuestions(shuffled);
+  }, [])
+
+  // let quizContent = (
+  //   <div className="">
+  //     <div className="mb-5">{shuffledQuestions[currentQuestion].title}</div>
+  //     <div className=" flex flex-col gap-3 w-1/2 m-auto pb-10">
+  //       {shuffledQuestions[currentQuestion].choices.map((choice) => (
+  //         <Button key={choice} onClick={checkAnswer} value={choice}>
+  //           {choice}
+  //         </Button>
+  //       ))}
+  //     </div>
+  //   </div>
+  // );
 
   return (
     <div className="overflow-scroll w-4/5 m-auto md:w-1/2  h-2/5 md:h-1/2 md:float-right text-center bg-blue-50/[.75] p-5">
-      {quizCountDown === 0 && showResults === false && quizContent}
+      {quizCountDown === 0 && showResults === false && (
+        <div className="">
+          <div className="mb-5">{shuffledQuestions[currentQuestion].title}</div>
+          <div className=" flex flex-col gap-3 w-1/2 m-auto pb-10">
+            {shuffledQuestions[currentQuestion].choices.map((choice) => (
+              <Button key={choice} onClick={checkAnswer} value={choice}>
+                {choice}
+              </Button>
+            ))}
+          </div>
+        </div>
+      )}
       {quizCountDown !== 0 &&
         showResults === false &&
         `The race starts in ${quizCountDown}`}
