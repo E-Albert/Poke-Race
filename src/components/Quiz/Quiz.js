@@ -11,9 +11,11 @@ function Quiz(props) {
   const [numberWrong, setNumberWrong] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [totalQuestions, setTotalQuestions] = useState(0);
+  const [consecutiveCorrect, setConsecutiveCorrect] = useState(0)
 
   console.log(isAnswerCorrect);
   let { raceIsOver } = props;
+  let { userAttack } = props;
 
   function checkAnswer(event) {
     console.log(event.target.value);
@@ -22,15 +24,19 @@ function Quiz(props) {
       setIsAnswerCorrect(1);
       setNumberCorrect((prevNumCorrect) => prevNumCorrect + 1);
       setTotalQuestions((prevTotal) => prevTotal + 1);
+      setConsecutiveCorrect((prevTotal) => prevTotal + 1)
     } else {
       console.log("Darn, try again next time.");
       setIsAnswerCorrect(2);
       setNumberWrong((prevNumWrong) => prevNumWrong + 1);
       setTotalQuestions((prevTotal) => prevTotal + 1);
+      setConsecutiveCorrect(0)
     }
     props.questionPenalty(isAnswerCorrect);
+    console.log('total questions: ' + totalQuestions)
     nextQuestion();
   }
+  console.log(consecutiveCorrect)
 
   function nextQuestion() {
     if (currentQuestion < pokeQuestions.length - 1) {
@@ -65,6 +71,13 @@ function Quiz(props) {
       setShowResults(true);
     }
   }, [showResults, raceIsOver]);
+
+  useEffect(() => {
+    if (consecutiveCorrect === 5) {
+      userAttack(true);
+      setConsecutiveCorrect(0);
+    }
+  }, [consecutiveCorrect, userAttack])
 
   let quizContent = (
     <div className="">

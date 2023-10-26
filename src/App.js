@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import StartPage from "./components/UI/StartPage";
 import Header from "./components/UI/Header";
@@ -8,13 +8,6 @@ import Quiz from "./components/Quiz/Quiz";
 import RaceScreen from "./components/Race/RaceScreen";
 
 
-/*
-  -find ways to add animation
-  -add highscores page
-  -fix attacks to be unique
-  -loading image
-  */
-
 function App() {
   const [homepage, setHomePage] = useState(true);
   const [modal, setModal] = useState(true);
@@ -23,6 +16,7 @@ function App() {
   const [preQuizClockAtZero, setPreQuizClockAtZero] = useState(false);
   const [isUserCorrect, setIsUserCorrect] = useState()
   const [isGameOver, setIsGameOver] = useState(false)
+  const [attackOpponent, setAttackOpponent] = useState(false)
  
   function clickHandler() {
     setHomePage(false);
@@ -54,6 +48,12 @@ function App() {
     setIsUserCorrect(penaltyApplied)
   }
 
+  function attackOpponentHandler(answer) {
+    let userAttack = answer
+    console.log(answer + ' keep going')
+    setAttackOpponent(userAttack)
+  }
+
   function gameOver(raceFinished) {
     if (raceFinished) {
       setIsGameOver(true)
@@ -65,6 +65,10 @@ function App() {
     setPreQuizClockAtZero(false)
     setIsGameOver(false)
   }
+
+  useEffect(() => {
+    setAttackOpponent(false)
+  }, [attackOpponent])
 
   return (
     <div className="h-screen overflow-scroll">
@@ -79,7 +83,8 @@ function App() {
             racerInfo={pokemonInfo}
             startRace={preQuizClockAtZero}
             applyPenalty={isUserCorrect}
-            raceOver={gameOver}
+          raceOver={gameOver}
+          userIsAttacking={attackOpponent}
           />
         )}
       {!homepage && pokemonChosen && (
@@ -88,6 +93,7 @@ function App() {
           questionPenalty={wrongAnswerPenalty}
           raceIsOver={isGameOver}
           playAgain={playAgain}
+          userAttack={attackOpponentHandler}
         />
       )}
     </div>
