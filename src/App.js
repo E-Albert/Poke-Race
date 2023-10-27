@@ -14,9 +14,10 @@ function App() {
   const [pokemonChosen, setPokemonChosen] = useState(false);
   const [pokemonInfo, setPokemonInfo] = useState({});
   const [preQuizClockAtZero, setPreQuizClockAtZero] = useState(false);
-  const [isUserCorrect, setIsUserCorrect] = useState()
+  // const [isUserCorrect, setIsUserCorrect] = useState()
   const [isGameOver, setIsGameOver] = useState(false)
   const [attackOpponent, setAttackOpponent] = useState(false)
+  const [attackUser, setAttackUser] = useState(false)
  
   function clickHandler() {
     setHomePage(false);
@@ -42,16 +43,22 @@ function App() {
     }
   }
 
-  function wrongAnswerPenalty(answer) {
-    let penaltyApplied = answer
-    console.log(penaltyApplied)
-    setIsUserCorrect(penaltyApplied)
-  }
+  // function wrongAnswerPenalty(answer) {
+  //   let penaltyApplied = answer
+  //   console.log(penaltyApplied)
+  //   setIsUserCorrect(penaltyApplied)
+  // }
 
   function attackOpponentHandler(answer) {
     let userAttack = answer
-    console.log(answer + ' keep going')
+    console.log(userAttack + ' keep going')
     setAttackOpponent(userAttack)
+  }
+
+  function attackUserHandler(answer) {
+    let opponentAttack = answer
+    console.log(opponentAttack + ' you\'re doing great sweetie')
+    setAttackUser(opponentAttack)
   }
 
   function gameOver(raceFinished) {
@@ -70,6 +77,10 @@ function App() {
     setAttackOpponent(false)
   }, [attackOpponent])
 
+  useEffect(() => {
+    setAttackUser(false)
+  }, [attackUser])
+
   return (
     <div className="h-screen overflow-scroll">
       {homepage && <StartPage removeStartPage={clickHandler} />}
@@ -82,18 +93,20 @@ function App() {
           <RaceScreen
             racerInfo={pokemonInfo}
             startRace={preQuizClockAtZero}
-            applyPenalty={isUserCorrect}
+            // applyPenalty={isUserCorrect}
           raceOver={gameOver}
           userIsAttacking={attackOpponent}
+          opponentIsAttacking={attackUser}
           />
         )}
       {!homepage && pokemonChosen && (
         <Quiz
           preQuiz={startRace}
-          questionPenalty={wrongAnswerPenalty}
+          // questionPenalty={wrongAnswerPenalty}
           raceIsOver={isGameOver}
           playAgain={playAgain}
           userAttack={attackOpponentHandler}
+          opponentAttack={attackUserHandler}
         />
       )}
     </div>

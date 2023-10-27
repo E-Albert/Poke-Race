@@ -6,34 +6,37 @@ import QuizResults from "./QuizResults";
 function Quiz(props) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [quizCountDown, setQuizCountDown] = useState(5);
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState(0);
+  // const [isAnswerCorrect, setIsAnswerCorrect] = useState(0);
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [numberWrong, setNumberWrong] = useState(0);
   const [showResults, setShowResults] = useState(false);
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [consecutiveCorrect, setConsecutiveCorrect] = useState(0)
   const [shuffledQuestions, setShuffledQuestions] = useState([])
+  const [opponentAttacking, setOpponentAttacking] = useState(false)
 
-  console.log(isAnswerCorrect);
+  // console.log(isAnswerCorrect);
   let { raceIsOver } = props;
   let { userAttack } = props;
+  let { opponentAttack } = props;
 
   function checkAnswer(event) {
     console.log(event.target.value);
     if (event.target.value === shuffledQuestions[currentQuestion].answer) {
       console.log("Hooray, +1 point for you!");
-      setIsAnswerCorrect(1);
+      // setIsAnswerCorrect(1);
       setNumberCorrect((prevNumCorrect) => prevNumCorrect + 1);
       setTotalQuestions((prevTotal) => prevTotal + 1);
       setConsecutiveCorrect((prevTotal) => prevTotal + 1)
     } else {
       console.log("Darn, try again next time.");
-      setIsAnswerCorrect(2);
+      setOpponentAttacking(true)
+      // setIsAnswerCorrect(2);
       setNumberWrong((prevNumWrong) => prevNumWrong + 1);
       setTotalQuestions((prevTotal) => prevTotal + 1);
       setConsecutiveCorrect(0)
     }
-    props.questionPenalty(isAnswerCorrect);
+    // props.questionPenalty(isAnswerCorrect);
     console.log('total questions: ' + totalQuestions)
     nextQuestion();
   }
@@ -79,6 +82,14 @@ function Quiz(props) {
       setConsecutiveCorrect(0);
     }
   }, [consecutiveCorrect, userAttack])
+
+  useEffect(() => {
+    if (opponentAttacking) {
+      //props function is going to run here
+      opponentAttack(opponentAttacking)
+      setOpponentAttacking(false)
+    }
+  }, [opponentAttacking, opponentAttack])
 
   useEffect(() => {
     const shuffled = [...pokeQuestions];

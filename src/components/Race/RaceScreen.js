@@ -12,10 +12,11 @@ function RaceScreen(props) {
   const [pokeWinner, setPokeWinner] = useState({})
 
   let { startRace } = props;
-  let { applyPenalty } = props;
+  // let { applyPenalty } = props;
   let { raceOver } = props;
   let { racerInfo } = props;
   let { userIsAttacking } = props;
+  let { opponentIsAttacking } = props;
 
   function startRacing(startRace) {
     console.log(startRace);
@@ -62,17 +63,23 @@ function RaceScreen(props) {
     
   }, [userRaceDistance, opponentRaceDistance, raceOver, racerInfo])
 
-    useEffect(() => {
-        if (applyPenalty === 2) {
-     setUserRaceDistance((prevDistance) => prevDistance - 5);
-  }
-    }, [applyPenalty])
+  //   useEffect(() => {
+  //       if (applyPenalty === 2) {
+  //    setUserRaceDistance((prevDistance) => prevDistance - 5);
+  // }
+  //   }, [applyPenalty])
   
   useEffect(() => {
     if (userIsAttacking === true) {
       setOpponentRaceDistance((prevDistance) => prevDistance - 10);
     }
   }, [userIsAttacking]);
+
+  useEffect(() => {
+    if (opponentIsAttacking === true) {
+      setUserRaceDistance((prevDistance) => prevDistance - 5)
+    }
+  }, [opponentIsAttacking])
 
   return (
     <div className="m-auto w-4/5 md:w-1/2 h-[45%] md:h-1/2 bg-blue-50/[.75] md:inline-block p-2 mb-1">
